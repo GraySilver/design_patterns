@@ -8,7 +8,7 @@
 
 **缺点**：当对系统进行扩展的时候，比如增加一个Tesla类，不需要修改其他产品类，如Baoma和Benchi，貌似符合OCP原则，但实际上还是需要对工厂类进行修改，所以简单工厂模式不符合OCP原则。 
 
- ![](http://www.runoob.com/wp-content/uploads/2014/08/factory_pattern_uml_diagram.jpg)
+ ![](http://graysliver.oss-cn-shenzhen.aliyuncs.com/design_patterns/factory_pattern_uml_diagram.jpg)
 
 ### 抽象工厂
 
@@ -20,5 +20,5 @@
 
 **缺点**：产品链要扩展很困难，要增加一个系统的某一产品，既要在抽象的接口加代码，也要在具体的产品链中加代码。
 
-![](http://www.runoob.com/wp-content/uploads/2014/08/abstractfactory_pattern_uml_diagram.jpg)
+![](http://graysliver.oss-cn-shenzhen.aliyuncs.com/design_patterns/abstractfactory_pattern_uml_diagram.jpg)
 

@@ -20,7 +20,7 @@
 
 **特点**：纵向易扩展，横向难扩展。
 
-![](http://www.runoob.com/wp-content/uploads/2014/08/abstractfactory_pattern_uml_diagram.jpg)
+![](http://graysliver.oss-cn-shenzhen.aliyuncs.com/design_patterns/abstractfactory_pattern_uml_diagram.jpg)
 
 ### Example:
 

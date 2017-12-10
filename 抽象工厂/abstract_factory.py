@@ -1,107 +1,80 @@
-class Frog:
-
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return self.name
-
-    def interact_with(self, obstacle):
-        print('{} the Frog encounters {} and {}!'.format(self,
-                                                         obstacle, obstacle.action()))
+# -*-coding:utf-8-*-
 
 
-class Bug:
+# 形状
+# 横向扩展需要修改,纵向扩展不需要
+class Shape:
+    def drawRectangle(self):
+        print('Rectangle')
 
-    def __str__(self):
-        return 'a bug'
+    def drawCircle(self):
+        print('Circle')
 
-    def action(self):
-        return 'eats it'
+    def drawSquare(self):
+        print('Square')
 
+# 颜色
+# 横向扩展需要修改,纵向扩展不需要
+class Color:
+    def fillRed(self):
+        print('Red')
 
-class FrogWorld:
+    def fillGreen(self):
+        print('Green')
 
-    def __init__(self, name):
-        print(self)
-        self.player_name = name
-
-    def __str__(self):
-        return '\n\n\t------ Frog World ———'
-
-    def make_character(self):
-        return Frog(self.player_name)
-
-    def make_obstacle(self):
-        return Bug()
-
-
-class Wizard:
-
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return self.name
-
-    def interact_with(self, obstacle):
-        print('{} the Wizard battles against {} and {}!'.format(self, obstacle, obstacle.action()))
+    def fillBlue(self):
+        print('Blue')
 
 
-class Ork:
+# 形状接口配置
+# 横向扩展需要修改,纵向扩展不需要
+class ShapeFactory:
+    def getShape(self,shape):
+        s = Shape()
+        if shape == 'rectangle':
+            s.drawRectangle()
+        elif shape == 'circle':
+            s.drawCircle()
+        elif shape == 'square':
+            s.drawSquare()
+        else:
+            raise ValueError('shape error')
 
-    def __str__(self):
-        return 'an evil ork'
+# 颜色接口配置
+# 横向扩展需要修改,纵向扩展不需要
+class ColorFactory:
+    def getColor(self,color):
+        c = Color()
+        if color == 'red':
+            c.fillRed()
+        elif color == 'green':
+            c.fillGreen()
+        elif color == 'blue':
+            c.fillBlue()
+        else:
+            raise ValueError('color error')
 
-    def action(self):
-        return 'kills it'
+# 颜色和形状的抽象接口配置
+class AbstractFactory:
 
+    def getShape(self,shape):
+        sf = ShapeFactory()
+        return sf.getShape(shape)
 
-class WizardWorld:
-
-    def __init__(self, name):
-        print(self)
-        self.player_name = name
-
-    def __str__(self):
-        return '\n\n\t------ Wizard World ———'
-
-    def make_character(self):
-        return Wizard(self.player_name)
-
-    def make_obstacle(self):
-        return Ork()
-
-
-class GameEnvironment:
-
-    def __init__(self, factory):
-        self.hero = factory.make_character()
-        self.obstacle = factory.make_obstacle()
-
-    def play(self):
-        self.hero.interact_with(self.obstacle)
-
-
-def validate_age(name):
-    try:
-        age = input('Welcome {}. How old are you? '.format(name))
-        age = int(age)
-    except ValueError as err:
-        print("Age {} is invalid, please try \
-        again…".format(age))
-        return (False, age)
-    return (True, age)
+    def getColor(self,color):
+        cf = ColorFactory()
+        return cf.getColor(color)
 
 
-def main():
-    name = input("Hello. What's your name? ")
-    valid_input = False
-    while not valid_input:
-        valid_input, age = validate_age(name)
-    game = FrogWorld if age < 18 else WizardWorld
-    environment = GameEnvironment(game(name))
-    environment.play()
+# 调用接口，生产
+class FactoryProducer:
+
+    def fprint(self):
+        af = AbstractFactory()
+        af.getColor('blue')
+        af.getShape('square')
+
 
 if __name__ == '__main__':
-    main()
+    fp = FactoryProducer()
+    fp.fprint()
